@@ -2,6 +2,7 @@ package com.pharmacy.pharmacyapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,15 @@ public class brandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public void updateBrand(Integer id, Brand brand) {
+	public Optional<Brand> updateBrand(Integer id, Brand brand) {
 		// TODO Auto-generated method stub
-		brand.setId(id);
-		brandRepository.save(brand);
+		//brand.setId(id);
+		//brandRepository.save(brand);
+		return brandRepository.findById(id).map(e->{
+			e.setName(brand.getName());
+			e.setCatid(brand.getCatid());
+			return e;
+		});
 	}
 
 	@Override
@@ -42,4 +48,23 @@ public class brandServiceImpl implements BrandService {
 		brandRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public Brand getById(Integer id) {
+		// TODO Auto-generated method stub
+		Optional <Brand> bd = Optional.ofNullable(brandRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("invalid Id")));
+		Brand brand =bd.get();
+		return brand;
+	}
+
+	@Override
+	public List<Brand> getAllByCatName() {
+		// TODO Auto-generated method stub
+		List<Brand>brandlist = new ArrayList<>();
+		brandRepository.findByCategoryID().forEach(brandlist::add);
+		return brandlist;
+	}
+
+	
 }

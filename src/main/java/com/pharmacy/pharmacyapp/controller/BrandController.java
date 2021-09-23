@@ -33,5 +33,9 @@ public class BrandController {
 		brandService.deleteBrand(id);
 		
 	}
+	@RequestMapping("/getallbycatname")
+	public List<Brand> getAllByCatName(){		
+		return brandService. getAllByCatName();
+	}
 
 }
