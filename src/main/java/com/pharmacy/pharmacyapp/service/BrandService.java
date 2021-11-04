@@ -3,6 +3,7 @@ package com.pharmacy.pharmacyapp.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.pharmacy.pharmacyapp.DTO.BrandDto;
 import com.pharmacy.pharmacyapp.model.Brand;
 
 public interface BrandService {
@@ -17,8 +18,7 @@ public interface BrandService {
 
 	void deleteBrand(Integer id);
 
-	List<Brand> getAllByCatName();
-
+	List<BrandDto> getallCatnum();
 	
 
 }

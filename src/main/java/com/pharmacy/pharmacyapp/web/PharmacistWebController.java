@@ -19,7 +19,7 @@ public class PharmacistWebController {
 	@Autowired
 	private PharmacistService pharmacistService;
 	
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String  showIndex() {
 		return "index";
 	}

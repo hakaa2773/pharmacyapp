@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pharmacy.pharmacyapp.DTO.BrandDto;
 import com.pharmacy.pharmacyapp.model.Brand;
 import com.pharmacy.pharmacyapp.repository.BrandRepository;
 
@@ -31,13 +34,13 @@ public class brandServiceImpl implements BrandService {
 	}
 
 	@Override
+	@Transactional
 	public Optional<Brand> updateBrand(Integer id, Brand brand) {
 		// TODO Auto-generated method stub
 		//brand.setId(id);
 		//brandRepository.save(brand);
 		return brandRepository.findById(id).map(e->{
 			e.setName(brand.getName());
-			e.setCatid(brand.getCatid());
 			return e;
 		});
 	}
@@ -59,12 +62,11 @@ public class brandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public List<Brand> getAllByCatName() {
+	public List<BrandDto> getallCatnum() {
 		// TODO Auto-generated method stub
-		List<Brand>brandlist = new ArrayList<>();
-		brandRepository.findByCategoryID().forEach(brandlist::add);
-		return brandlist;
+		List<BrandDto> brandDtos = new ArrayList<BrandDto>();
+		brandRepository.getbycatname().forEach(brandDtos::add);
+		return brandDtos;
 	}
-
 	
 }

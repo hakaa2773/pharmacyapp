@@ -3,12 +3,14 @@ package com.pharmacy.pharmacyapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pharmacy.pharmacyapp.DTO.InvoiceDto;
 import com.pharmacy.pharmacyapp.model.Invoice;
 import com.pharmacy.pharmacyapp.service.InvoiceService;
 
@@ -32,6 +34,10 @@ public class InvoiceController {
 	@RequestMapping(method = RequestMethod.DELETE,value = "/deleteinvoice/{id}")
 	public void deleteInvoice(@PathVariable Integer id) {
 		invoiceService.deleteInvoice(id);
+	}
+	@GetMapping("/getallinvoicenames")
+	public List<InvoiceDto> getallInvoiceNames(){
+		return invoiceService.getallInvoiceNames();
 	}
 
 }

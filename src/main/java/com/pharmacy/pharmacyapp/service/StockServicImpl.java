@@ -2,10 +2,14 @@ package com.pharmacy.pharmacyapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pharmacy.pharmacyapp.DTO.StockDto;
 import com.pharmacy.pharmacyapp.model.Stock;
 import com.pharmacy.pharmacyapp.repository.StockRepocitory;
 
@@ -30,10 +34,18 @@ public class StockServicImpl implements StockService{
 	}
 
 	@Override
-	public void updateStock(Integer id, Stock stock) {
+	@Transactional
+	public Optional<Stock> updateStock(Integer id, Stock stock) {
 		// TODO Auto-generated method stub
-		stock.setId(id);
-		stockRepocitory.save(stock);
+		//stock.setId(id);
+		//stockRepocitory.save(stock);
+		return stockRepocitory.findById(id).map(e->{
+			e.setMfdate(stock.getMfdate());
+			e.setExpdate(stock.getExpdate());
+			e.setSqty(stock.getSqty());
+			e.setSrdate(stock.getSrdate());
+			return e;
+		});
 		
 	}
 
@@ -42,6 +54,23 @@ public class StockServicImpl implements StockService{
 		// TODO Auto-generated method stub
 		stockRepocitory.deleteById(id);
 		
+	}
+
+	@Override
+	public Stock getById(Integer id) {
+		// TODO Auto-generated method stub
+		Optional <Stock> st = Optional.ofNullable(stockRepocitory.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("invalid Id")));
+		Stock stock = st.get();
+		return stock;
+	}
+
+	@Override
+	public List<StockDto> getallStockNames() {
+		// TODO Auto-generated method stub
+		List<StockDto> stockDtos = new ArrayList<StockDto>();
+		stockRepocitory.getallStocknames().forEach(stockDtos::add);
+		return stockDtos;
 	}
 
 }

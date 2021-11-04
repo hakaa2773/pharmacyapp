@@ -152,7 +152,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index">
+            <a class="nav-link" href="/index">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -202,7 +202,12 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/viewbrand">Brand</a></li>
               </ul>
-            </div>             
+            </div>   
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewsupplier">Supplier</a></li>
+              </ul>
+            </div>                      
           </li>     
       </nav>
       <!-- SideNav-->
@@ -230,17 +235,17 @@
 						</thead>
 						<tbody>
 							<tr th:each="brand : ${brand}">
-								<td th:text="${brand.id}"></td>
-								<td th:text="${brand.name}"></td>
-								<td th:text="${brand.category_name}"></td>
-								<td><a th:href="@{/showbrand/{id}(id=${brand.id})}"><i class="bi bi-pencil-square"></i></a></td>
-								<td><a th:href="@{/deleteCategory/{id}(id=${brand.id})}"><i class="bi bi-trash"style="color:#ff0000"></i></a></td>	
+								<td th:text="${brand.brandid}"></td>   
+								<td th:text="${brand.brandname}"></td>
+								<td th:text="${brand.catname}"></td>
+								<td><a th:href="@{/showbrand/{id}(id=${brand.brandid})}"><i class="bi bi-pencil-square"></i></a></td>
+								<td><a th:href="@{/deletebrand/{id}(id=${brand.brandid})}"><i class="bi bi-trash"style="color:#ff0000"></i></a></td>	
 							</tr>
 						</tbody>		
 					</table>
 				</div>
 			</div>
-			<Button class="btn btn-dark"onclick="location.href='/showaddcategory'" type="button">Add Category</Button>
+			<Button class="btn btn-dark"onclick="location.href='/showaddbrand'" type="button">Add Brand</Button>
 			</div>      
          </div>
       </div>

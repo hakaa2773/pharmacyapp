@@ -1,12 +1,14 @@
 package com.pharmacy.pharmacyapp.model;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="tbl_orders")
@@ -14,29 +16,31 @@ public class Orders {
 	@Id
 	@Column(name="order_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer id;
+	private Integer id;
 	@Column(name="order_date")
-	public Date odate;
+	private String odate;
 	@Column(name="order_qty")
-	public Integer oqty;
+	private Integer oqty;
 	@Column(name="order_price")
-	public float oprice;
+	private float oprice;
 	@Column(name="order_total")
-	public float ototal;
-	@Column(name="invoice_id")
-	public Integer invoiceid;
-	@Column(name="drug_id")
-	public Integer drugid;
+	private float ototal;
+	@OneToOne(targetEntity = Invoice.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="invoice_id", referencedColumnName = "invoice_id")
+	private Invoice invoice;
+	@OneToOne(targetEntity = Drugs.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="drug_id" , referencedColumnName = "drug_id")
+	private Drugs drugs;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getOdate() {
+	public String getOdate() {
 		return odate;
 	}
-	public void setOdate(Date odate) {
+	public void setOdate(String odate) {
 		this.odate = odate;
 	}
 	public Integer getOqty() {
@@ -57,19 +61,20 @@ public class Orders {
 	public void setOtotal(float ototal) {
 		this.ototal = ototal;
 	}
-	public Integer getInvoiceid() {
-		return invoiceid;
+	public Invoice getInvoice() {
+		return invoice;
 	}
-	public void setInvoiceid(Integer invoiceid) {
-		this.invoiceid = invoiceid;
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
-	public Integer getDrugid() {
-		return drugid;
+	public Drugs getDrugs() {
+		return drugs;
 	}
-	public void setDrugid(Integer drugid) {
-		this.drugid = drugid;
+	public void setDrugs(Drugs drugs) {
+		this.drugs = drugs;
 	}
 	
 	
-
+	
+	
 }

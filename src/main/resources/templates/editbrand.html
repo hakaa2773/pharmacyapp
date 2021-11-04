@@ -16,7 +16,7 @@
 
 	<div class="container-fluid">
 	<h1 class="display-2"><center><B>Update Brand</B></center></h1>
-		 <form th:object="${brand}" method="post" th:action="@{/showbrand/{id} (id=${brand.id})}" class="form">		 
+		 <form th:object="${brand}" method="post" th:action="@{/updatebrand/{id} (id=${brand.id})}" class="form">		 
               <div class="mb-3 row">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">

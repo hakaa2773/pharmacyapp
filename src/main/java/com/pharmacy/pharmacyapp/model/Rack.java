@@ -2,9 +2,13 @@ package com.pharmacy.pharmacyapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,35 +19,42 @@ public class Rack {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column(name="rack_row")
-	private Integer row;
-	@Column(name="category_id")
-	private Integer catid;
-	@Column(name="brand_id")
-	private Integer brandid;
+	private String row;
+	@ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="category_id",referencedColumnName = "category_id")
+	private Category category;
+	@OneToOne(targetEntity = Brand.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="brand_id",referencedColumnName = "brand_id")
+	private Brand brand;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getRow() {
+	public String getRow() {
 		return row;
 	}
-	public void setRow(Integer row) {
+	public void setRow(String row) {
 		this.row = row;
 	}
-	public Integer getCatid() {
-		return catid;
+	public Category getCategory() {
+		return category;
 	}
-	public void setCatid(Integer catid) {
-		this.catid = catid;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
-	public Integer getBrandid() {
-		return brandid;
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setBrandid(Integer brandid) {
-		this.brandid = brandid;
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
+	
+	
+	
+	
+	
 	
 	
 	

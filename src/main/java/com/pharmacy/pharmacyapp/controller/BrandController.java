@@ -3,12 +3,14 @@ package com.pharmacy.pharmacyapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pharmacy.pharmacyapp.DTO.BrandDto;
 import com.pharmacy.pharmacyapp.model.Brand;
 import com.pharmacy.pharmacyapp.service.BrandService;
 
@@ -30,12 +32,12 @@ public class BrandController {
 	}
 	@RequestMapping(method = RequestMethod.DELETE,value = "/deletebrand/{id}")
 	public void deleteBrand(@PathVariable Integer id) {
-		brandService.deleteBrand(id);
-		
+		brandService.deleteBrand(id);		
 	}
-	@RequestMapping("/getallbycatname")
-	public List<Brand> getAllByCatName(){		
-		return brandService. getAllByCatName();
+	
+	@GetMapping("/getbycatid")
+	public List<BrandDto> getallCatnum (){
+		return brandService.getallCatnum();
 	}
 
 }

@@ -2,10 +2,14 @@ package com.pharmacy.pharmacyapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pharmacy.pharmacyapp.DTO.OrdersDto;
 import com.pharmacy.pharmacyapp.model.Orders;
 import com.pharmacy.pharmacyapp.repository.OrdersRepository;
 
@@ -30,10 +34,18 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public void updateOrders(Integer id, Orders orders) {
+	@Transactional
+	public Optional<Orders> updateOrders(Integer id, Orders orders) {
 		// TODO Auto-generated method stub
-		orders.setId(id);
-		ordersRepository.save(orders);
+		//orders.setId(id);
+		//ordersRepository.save(orders);
+		return ordersRepository.findById(id).map(e->{
+			e.setOdate(orders.getOdate());
+			e.setOqty(orders.getOqty());
+			e.setOprice(orders.getOprice());
+			e.setOtotal(orders.getOtotal());
+			return e;
+		});
 		
 	}
 
@@ -42,6 +54,23 @@ public class OrdersServiceImpl implements OrdersService {
 		// TODO Auto-generated method stub
 		ordersRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public Orders getById(Integer id) {
+		// TODO Auto-generated method stub
+		Optional <Orders> od = Optional.ofNullable(ordersRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("invalid Id")));
+		Orders orders = od.get();
+		return orders;
+	}
+
+	@Override
+	public List<OrdersDto> getallOrdernames() {
+		// TODO Auto-generated method stub
+		List<OrdersDto> ordersDtos = new ArrayList<OrdersDto>();
+		ordersRepository.getallOrdernames().forEach(ordersDtos::add);
+		return ordersDtos;
 	}
 
 }
