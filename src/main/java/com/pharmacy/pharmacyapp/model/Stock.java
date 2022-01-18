@@ -1,48 +1,52 @@
 package com.pharmacy.pharmacyapp.model;
 
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_stock")
-public class Stock {
+
+public class Stock implements java.io.Serializable {
 	@Id
 	@Column(name="stock_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column(name="stock_mf_date")
-	private Date mfdate;
+	private String mfdate;
 	@Column(name="stock_exp_date")
-	private Date expdate;
+	private String expdate;
 	@Column(name="stock_qty")
 	private Integer sqty;
 	@Column(name="stock_rcv_date")
-	private Date srdate;
-	@Column(name="drug_id")
-	public Integer drugid;
-	
+	private String srdate;
+	@OneToOne(targetEntity =Drugs.class, fetch = FetchType.LAZY )
+	@JoinColumn(name="drug_id", referencedColumnName = "drug_id")
+	private Drugs drugs;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getMfdate() {
+	public String getMfdate() {
 		return mfdate;
 	}
-	public void setMfdate(Date mfdate) {
+	public void setMfdate(String mfdate) {
 		this.mfdate = mfdate;
 	}
-	public Date getExpdate() {
+	public String getExpdate() {
 		return expdate;
 	}
-	public void setExpdate(Date expdate) {
+	public void setExpdate(String expdate) {
 		this.expdate = expdate;
 	}
 	public Integer getSqty() {
@@ -51,18 +55,22 @@ public class Stock {
 	public void setSqty(Integer sqty) {
 		this.sqty = sqty;
 	}
-	public Date getSrdate() {
+	public String getSrdate() {
 		return srdate;
 	}
-	public void setSrdate(Date srdate) {
+	public void setSrdate(String srdate) {
 		this.srdate = srdate;
 	}
-	public Integer getDrugid() {
-		return drugid;
+	public Drugs getDrugs() {
+		return drugs;
 	}
-	public void setDrugid(Integer drugid) {
-		this.drugid = drugid;
+	public void setDrugs(Drugs drugs) {
+		this.drugs = drugs;
 	}
+
+	
+
+	
 	
 	
 	

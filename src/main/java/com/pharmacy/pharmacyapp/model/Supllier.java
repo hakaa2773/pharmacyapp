@@ -2,9 +2,12 @@ package com.pharmacy.pharmacyapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +21,12 @@ public class Supllier {
 	private String name;
 	@Column(name="supllier_email")
 	private String email;
-	@Column(name="brand_id")
-	private Integer brandid;
+	@OneToOne(targetEntity = Brand.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="brand_id", referencedColumnName = "brand_id")
+	private Brand brand;
+	
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -38,12 +45,17 @@ public class Supllier {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getBrandid() {
-		return brandid;
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setBrandid(Integer brandid) {
-		this.brandid = brandid;
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
+	
+	
+
+	
+	
 	
 	
 

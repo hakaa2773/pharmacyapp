@@ -1,12 +1,13 @@
 package com.pharmacy.pharmacyapp.model;
 
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
 @Entity
 @Table(name="tbl_invoice")
@@ -16,25 +17,21 @@ public class Invoice {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column(name="invoice_date")
-	private Date date;
+	private String date;
 	@Column(name="invoice_total")
 	private float total;
-	@Column(name="pharmacist_id")
-	private Integer pid;
-	
-	
-	
-	
+	@Column(name="pharmacist_email")
+	private String email;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public float getTotal() {
@@ -43,18 +40,12 @@ public class Invoice {
 	public void setTotal(float total) {
 		this.total = total;
 	}
-	public Integer getPid() {
-		return pid;
+	public String getEmail() {
+		return email;
 	}
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	
-	
-	
-	
-
 	
 	
 

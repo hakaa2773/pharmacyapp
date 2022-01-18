@@ -1,9 +1,12 @@
 package com.pharmacy.pharmacyapp.model;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 @Entity
@@ -18,8 +21,10 @@ public class Pharmacist {
 	private String name;
 	@Column(name="pharmacist_email")
 	private String email;
-	@Column(name="pharmacist_password")
-	private String password;
+	@OneToOne(targetEntity = User.class,cascade = CascadeType.ALL)
+	@JoinColumn(name="pharmacist_id", referencedColumnName = "login_id")
+	private User user;
+	
 	
 	
 	public Integer getId() {
@@ -40,10 +45,12 @@ public class Pharmacist {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
+	public User getUser() {
+		return user;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser(User user) {
+		this.user = user;
 	}
+	
+	
 }

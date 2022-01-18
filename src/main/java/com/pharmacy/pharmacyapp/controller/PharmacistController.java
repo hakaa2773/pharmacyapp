@@ -15,7 +15,8 @@ import com.pharmacy.pharmacyapp.service.PharmacistService;
 @RestController
 public class PharmacistController {
 	@Autowired
-	private PharmacistService pharmacistService;	
+	private PharmacistService pharmacistService;
+	
 	@RequestMapping(method =RequestMethod.POST,value ="/savepharmacist")
 	public void savePharmacist(@RequestBody Pharmacist pmacist) {
 		pharmacistService.savePharmacist(pmacist);

@@ -2,9 +2,12 @@ package com.pharmacy.pharmacyapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -19,14 +22,15 @@ public class StockReturn {
  private Integer srqty;
  @Column(name="stock_return_total")
  private float srtotal;
- @Column(name="stock_id")
- private Integer stockid;
- @Column(name="supllier_id")
- private Integer supllierid;
- @Column(name="payments_id")
- private Integer paymentid;
- 
- 
+ @OneToOne(targetEntity =Stock.class, fetch = FetchType.LAZY)
+ @JoinColumn(name="stock_id", referencedColumnName = "stock_id")
+ private Stock stock; 
+ @OneToOne(targetEntity =Supllier.class, fetch = FetchType.LAZY)
+ @JoinColumn(name="supllier_id", referencedColumnName = "supllier_id")
+ private Supllier supllier; 
+ @OneToOne(targetEntity =Payments.class, fetch = FetchType.LAZY)
+ @JoinColumn(name="payments_id", referencedColumnName = "payments_id")
+ private Payments payments;
 public Integer getId() {
 	return id;
 }
@@ -45,24 +49,25 @@ public float getSrtotal() {
 public void setSrtotal(float srtotal) {
 	this.srtotal = srtotal;
 }
-public Integer getStockid() {
-	return stockid;
+public Stock getStock() {
+	return stock;
 }
-public void setStockid(Integer stockid) {
-	this.stockid = stockid;
+public void setStock(Stock stock) {
+	this.stock = stock;
 }
-public Integer getSupllierid() {
-	return supllierid;
+public Supllier getSupllier() {
+	return supllier;
 }
-public void setSupllierid(Integer supllierid) {
-	this.supllierid = supllierid;
+public void setSupllier(Supllier supllier) {
+	this.supllier = supllier;
 }
-public Integer getPaymentid() {
-	return paymentid;
+public Payments getPayments() {
+	return payments;
 }
-public void setPaymentid(Integer paymentid) {
-	this.paymentid = paymentid;
+public void setPayments(Payments payments) {
+	this.payments = payments;
 }
+
  
  
  

@@ -8,9 +8,11 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pharmacy.pharmacyapp.model.Pharmacist;
+import com.pharmacy.pharmacyapp.model.User;
 import com.pharmacy.pharmacyapp.repository.PharmacistRepository;
 
 
@@ -20,10 +22,18 @@ public class PharmacistServiceImpl implements PharmacistService {
 	
 	@Autowired
 	private PharmacistRepository pharmacistRepository;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public void savePharmacist(Pharmacist pmacist) {
 		// TODO Auto-generated method stub
+		User user = new User();
+		user.setPassword(bCryptPasswordEncoder.encode("123456"));
+		user.setRole("ROLE_USER");
+		user.setUserName(pmacist.getEmail());
+		user.setStatus(true);
+		pmacist.setUser(user);
 		pharmacistRepository.save(pmacist);
 	}
 

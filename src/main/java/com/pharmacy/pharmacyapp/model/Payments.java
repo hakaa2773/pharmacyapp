@@ -2,9 +2,12 @@ package com.pharmacy.pharmacyapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,13 +19,9 @@ public class Payments {
 	private Integer id;
 	@Column(name="payments_total")
 	private float total;
-	@Column(name="supllier_id")
-	private Integer supllierid;
-	
-	
-	
-	
-	
+	@ManyToOne(targetEntity = Supllier.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="supllier_id", referencedColumnName ="supllier_id")
+	private Supllier supllier;
 	public Integer getId() {
 		return id;
 	}
@@ -35,11 +34,11 @@ public class Payments {
 	public void setTotal(float total) {
 		this.total = total;
 	}
-	public Integer getSupllierid() {
-		return supllierid;
+	public Supllier getSupllier() {
+		return supllier;
 	}
-	public void setSupllierid(Integer supllierid) {
-		this.supllierid = supllierid;
+	public void setSupllier(Supllier supllier) {
+		this.supllier = supllier;
 	}
 	
 	

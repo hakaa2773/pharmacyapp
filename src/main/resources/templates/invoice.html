@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>View Invoice</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/feather/feather.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/logo1.jpg" />
+  
+  
+  
+   <!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	<script type="text/javascript"
+	        src="https://code.jquery.com/jquery-3.5.1.js">
+	</script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 <script type="text/javascript"
+        src="https://code.jquery.com/jquery-3.5.1.js">
+</script>
+</head>
+<body>
+<!--bottom nav-->
+  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+         <a class="navbar-brand brand-logo mr-5" href="/index"><img src="images/logo2.jpg" class="mr-2" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" onkeyup = "search" placeholder="Search now" aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+               <div class="text-wrapper">
+			  <p class="profile-name" id="pName"><b>[[${#httpServletRequest.remoteUser}]]&nbsp;&nbsp;</b> </p>
+		 	  </div> 
+          </li>  
+           <li class="nav-item nav-profile dropdown">
+               <div class="text-wrapper">
+			  <button class="btn btn-primary" type="button" onclick="location.href='/logout'">Logout</button>
+		 	  </div> 
+          </li>
+              
+      </div>
+    </nav>
+    <!--bottom nav-->
+    
+    <!-- Side Nav-->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/index">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="icon-grid-2 menu-icon"></i>
+              <span class="menu-title">Tables</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewphamacist">Phamacist</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewCategory">Category</a></li>
+              </ul>
+            </div> 
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewbrand">Brand</a></li>
+              </ul>
+            </div>   
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewsupplier">Supplier</a></li>
+              </ul>
+            </div>  
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewdrugs">Drugs</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewinvoice">Billing</a></li>
+              </ul>
+            </div>  
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewpayments">Supplier Payments</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewrack">Rack</a></li>
+              </ul>
+            </div> 
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewstock">Stock</a></li>
+              </ul>
+            </div> 
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/viewPrescription">View Prescription</a></li>
+              </ul>
+            </div>           
+          </li>     
+      </nav>
+      <!-- SideNav-->
+
+
+<div class="float-container">
+<div class="float-child" style="width: 1000px;">
+<!-- partial -->
+<div class="main-panel">     
+<h1 class="display-2"><center><B>Billing System</B></center></h1>
+<div class="container">	
+  <div class="green">
+
+         <div class="row">
+	      <div class="container-flude">
+				    <div th:switch="${invoice}">
+					<h2 th:case="null">Drug list is empty</h2>
+					<div th:case="*">
+						<table class="table table-striped" id="myTable">
+							<thead>
+							    <tr>
+							    	<th>Stock ID</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>QYY</th>
+									<th>EXP Date</th>
+									<th>Add To Invoice</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="invoice : ${invoice}">
+									<td id="stock_id" th:text="${invoice.stock_id}"></td>
+									<td id="drug_name" th:text="${invoice.drugname}"></td>
+									<td id="drug_price" th:text="${invoice.drugPrice}"></td>
+									<td id="drug_qty" th:text="${invoice.stock_qty}"></td>
+									<td id="drug_exp_date" th:text="${invoice.stock_exp_date}"></td>
+									<td><i class="bi bi-bag-plus-fill btn btn-primary" name="btnadd" data-toggle="modal" data-target="#salesModal"></i></td>
+									
+								</tr>
+							</tbody>		
+						</table>
+					</div>
+				</div>	 
+			</div>
+    	</div>
+    	
+    	
+    	 <div class="modal fade" id="salesModal" role="dialog">
+		    <div class="modal-dialog">		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <h4 class="modal-title">Item Details</h4>
+		        </div>
+		        <div class="modal-body">
+		         <form>
+				    <div class="form-group">
+				    	<input type="hidden" id="txt_stock_id">
+				        <label  class="col-form-label">Drug Name:</label>
+				        <input type="text" id="txt_drug_name" readonly class="form-control">
+				        <label  class="col-form-label">Drug Price:</label>
+				        <input type="text" id="txt_drug_price" readonly class="form-control">
+				        <label  class="col-form-label">Drug Available Qty:</label>
+				        <input type="text" id="txt_drug_available_qty" readonly class="form-control">
+				        <label  class="col-form-label">Required Qty:</label>
+				        <input type="text" id="txt_required_qty"  class="form-control">
+				    </div>
+					</form>
+		        </div>
+		        <div class="modal-footer">
+		         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				 <button type="button" id="btn_add" class="btn btn-success">Add</button>
+		        </div>
+		      </div>		      
+		    </div>		
+		</div>
+  </div>
+</div> 
+</div>
+</div>
+<div class="float-child"> 
+   <div class="blue">
+   	<div class="col">
+		<table class="table" id="sales_tbl">
+		<h1> <center>Seetha Pharmacy</center></h1>
+		<thead>
+		<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Required Qty</th>
+		<th>Full Total</th>
+		<th></th>
+		</tr>
+		</thead>
+		<tbody id="tbl_invoice">
+		
+		</tbody>
+		<tfoot>
+		<tr>
+		<th colspan="3" align="right">Full Total</th>
+		<td colspan="2" id="txt_grd_total">0.00</td>
+		</tr>
+		</tfoot>		
+		</table>	
+		<p><center>Thnks For Shoping With Us</center></p>	
+		<p><center><b>Contact Us</b></center></p>
+		<p><center>081-1023669</center></p>
+		<p><center>seethapharmacy@gmail.com</center></p>
+		
+		</div>
+		<button type="button" class="btn btn-danger">Print</button>
+		<button type="button" class="btn btn-warning">Cancel</button>
+   </div>
+</div>
+</div>
+
+
+     <style type="text/css">.float-container {  padding: 20px; } .float-child { float: left; padding: 20px;border: 2px solid black;  }</style>
+	
+	 <script>
+    $(document).ready(function(){
+  $("#navbar-search-input").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  
+  //loading variables to modal 
+  
+  $(".bi-bag-plus-fill").click(function(){
+	  var stock_id = $ (this).parents("tr").find("#stock_id").html();
+	  var drug_name = $ (this).parents("tr").find("#drug_name").html();
+	  var drug_price = $ (this).parents("tr").find("#drug_price").html();
+	  var drug_qty = $ (this).parents("tr").find("#drug_qty").html();
+	//adding valuse to the text boxsess  
+	  $("#txt_stock_id").val(stock_id);
+	  $("#txt_drug_name").val(drug_name);
+	  $("#txt_drug_price").val(drug_price);
+	  $("#txt_drug_available_qty").val(drug_qty);  
+  });
+  //adding valuse to the table
+  $("#btn_add").click(function(){
+	  var s_id = $("#txt_stock_id").val();
+	  var d_name = $("#txt_drug_name").val();
+	  var d_price = $("#txt_drug_price").val();
+	  var d_aval_qty = parseInt($("#txt_drug_available_qty").val());
+	  var d_req_qty = parseInt($("#txt_required_qty").val());
+	  var grd_total = parseFloat($("#txt_grd_total").html());
+	  
+	  if(d_req_qty>d_aval_qty){
+		  alert("input valid qty");
+		  return;
+	  }
+	  var tot_price = d_price*d_req_qty;
+	  grd_total += tot_price;
+	  //update stock
+	  var p_qty = d_aval_qty - d_req_qty;
+	  //.........
+	  var row="<tr>";
+	  row += "<td>"+s_id+"</td>";
+	  row += "<td>"+d_name+"</td>";
+	  row += "<td>"+d_price+"</td>";
+	  row += "<td>"+d_req_qty+"</td>";
+	  row += "<td class='row_total'>"+tot_price+"</td>";
+	  row += "<td><a href='javascript:void(0)'><i class='bi bi-trash remove_item' style='color:red'></i></a></td>";
+	  row += "</tr>";
+	  $("#tbl_invoice").append(row);
+	  $("#txt_grd_total").html(grd_total+".00");
+	  $("#sales_tbl").css("display","block");	 
+	  
+	  //alert(p_qty);
+	  //update code ajax
+	  $.ajax({
+		  type: "PUT",
+		  url: "/updateStockqty/"+s_id+"/"+p_qty,
+		  success:function(data){
+		  //alert(data);
+		}
+		});
+	  
+  });
+  //deleting dynamic valuse from tabel 
+ $("#tbl_invoice").on("click",".remove_item",function(){
+	 var fulltotal=parseFloat($(this).parents("tr").find(".row_total").html());
+	  var grd_total = parseFloat($("#txt_grd_total").html());
+	  grd_total -= fulltotal;
+	  $("#txt_grd_total").html(grd_total);
+	  $(this).parents("tr").remove();
+ });
+  
+});
+</script>    
+      
+
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="js/dashboard.js"></script>
+  <script src="js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
+  
+  
+ 
+</body>
+
+</html>
+

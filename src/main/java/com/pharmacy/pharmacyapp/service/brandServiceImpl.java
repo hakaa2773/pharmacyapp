@@ -2,10 +2,14 @@ package com.pharmacy.pharmacyapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pharmacy.pharmacyapp.DTO.BrandDto;
 import com.pharmacy.pharmacyapp.model.Brand;
 import com.pharmacy.pharmacyapp.repository.BrandRepository;
 
@@ -30,10 +34,15 @@ public class brandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public void updateBrand(Integer id, Brand brand) {
+	@Transactional
+	public Optional<Brand> updateBrand(Integer id, Brand brand) {
 		// TODO Auto-generated method stub
-		brand.setId(id);
-		brandRepository.save(brand);
+		//brand.setId(id);
+		//brandRepository.save(brand);
+		return brandRepository.findById(id).map(e->{
+			e.setName(brand.getName());
+			return e;
+		});
 	}
 
 	@Override
@@ -42,4 +51,22 @@ public class brandServiceImpl implements BrandService {
 		brandRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public Brand getById(Integer id) {
+		// TODO Auto-generated method stub
+		Optional <Brand> bd = Optional.ofNullable(brandRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("invalid Id")));
+		Brand brand =bd.get();
+		return brand;
+	}
+
+	@Override
+	public List<BrandDto> getallCatnum() {
+		// TODO Auto-generated method stub
+		List<BrandDto> brandDtos = new ArrayList<BrandDto>();
+		brandRepository.getbycatname().forEach(brandDtos::add);
+		return brandDtos;
+	}
+	
 }

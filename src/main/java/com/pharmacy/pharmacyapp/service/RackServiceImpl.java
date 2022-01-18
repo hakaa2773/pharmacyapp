@@ -2,10 +2,14 @@ package com.pharmacy.pharmacyapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pharmacy.pharmacyapp.DTO.RackDto;
 import com.pharmacy.pharmacyapp.model.Rack;
 import com.pharmacy.pharmacyapp.repository.RackRepository;
 @Service
@@ -29,10 +33,15 @@ public class RackServiceImpl implements RackService {
 	}
 
 	@Override
-	public void updateRack(Integer id, Rack rack) {
+	@Transactional
+	public Optional<Rack> updateRack(Integer id, Rack rack) {
 		// TODO Auto-generated method stub
-		rack.setId(id);
-		rackRepository.save(rack);
+		//rack.setId(id);
+		//rackRepository.save(rack);
+		return rackRepository.findById(id).map(e->{
+			e.setRow(rack.getRow());
+			return e;
+		});
 		
 		
 	}
@@ -43,6 +52,24 @@ public class RackServiceImpl implements RackService {
 		rackRepository.deleteById(id);
 	}
 
+	@Override
+	public Rack getById(Integer id) {
+		// TODO Auto-generated method stub
+		Optional <Rack> rk = Optional.ofNullable(rackRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("invalid Id")));
+		Rack rack = rk.get();
+		return rack;
+	}
+
+	@Override
+	public List<RackDto> getallRackNames() {
+		// TODO Auto-generated method stub
+		List<RackDto> rackDtos = new ArrayList<RackDto>();
+		rackRepository.getallRackNames().forEach(rackDtos::add);
+		return rackDtos;
+	}
+
+	
 
 
 

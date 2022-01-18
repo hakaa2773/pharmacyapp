@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pharmacy.pharmacyapp.DTO.SupplierDto;
 import com.pharmacy.pharmacyapp.model.Supllier;
 import com.pharmacy.pharmacyapp.service.SupllierService;
 
@@ -31,8 +32,11 @@ public class SupllierController {
 	}
 	@RequestMapping(method = RequestMethod.DELETE,value = "/deletesuplliar/{id}")
 	public void deleteSupllier(@PathVariable Integer id) {
-		supllierService.deleteSupllier(id);
-		
+		supllierService.deleteSupllier(id);		
+	}
+	@RequestMapping("/getbybrandname")
+	public List<SupplierDto> getallBrandname(){
+		return supllierService.getallBrandname();
 	}
 
 }

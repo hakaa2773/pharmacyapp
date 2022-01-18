@@ -19,7 +19,7 @@ public class PharmacistWebController {
 	@Autowired
 	private PharmacistService pharmacistService;
 	
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String  showIndex() {
 		return "index";
 	}
@@ -28,6 +28,13 @@ public class PharmacistWebController {
 	public String getAllPharmacist(Model model) {
 		model.addAttribute("phamacist",pharmacistService.getAllPharmacist());
 		return "viewpharmacist";		
+	}
+	
+	
+	@GetMapping("/403")
+	public String error403() {
+		return "access_denied";
+		
 	}
 	
 	
