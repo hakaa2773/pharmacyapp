@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="tbl_category")
-public class Category {
+public class Category implements java.io.Serializable{
 	@Id
 	@Column(name="category_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

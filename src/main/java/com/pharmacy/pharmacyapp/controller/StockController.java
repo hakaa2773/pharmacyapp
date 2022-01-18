@@ -38,5 +38,7 @@ public class StockController {
 	public List<StockDto> getallStockNames(){
 		return stockService.getallStockNames();
 	}
+	
+	
 
 }

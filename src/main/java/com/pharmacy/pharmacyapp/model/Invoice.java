@@ -4,12 +4,10 @@ package com.pharmacy.pharmacyapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 @Entity
 @Table(name="tbl_invoice")
@@ -22,9 +20,8 @@ public class Invoice {
 	private String date;
 	@Column(name="invoice_total")
 	private float total;
-	@OneToOne(targetEntity = Pharmacist.class, fetch = FetchType.LAZY)
-	@JoinColumn(name="pharmacist_id", referencedColumnName = "pharmacist_id")
-	private Pharmacist pharmacist;
+	@Column(name="pharmacist_email")
+	private String email;
 	public Integer getId() {
 		return id;
 	}
@@ -43,11 +40,11 @@ public class Invoice {
 	public void setTotal(float total) {
 		this.total = total;
 	}
-	public Pharmacist getPharmacist() {
-		return pharmacist;
+	public String getEmail() {
+		return email;
 	}
-	public void setPharmacist(Pharmacist pharmacist) {
-		this.pharmacist = pharmacist;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

@@ -1,4 +1,5 @@
 package com.pharmacy.pharmacyapp.model;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,24 +9,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+
 @Entity
-@Table(name="tbl_pharmacist")
-public class Pharmacist {
+@Table(name="tbl_customer")
+public class Customer {
 	@Id
-	@Column(name="pharmacist_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="customer_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="pharmacist_name")
-	@NotBlank(message= "Name canot be empty")
+	@Column(name="customer_name")
 	private String name;
-	@Column(name="pharmacist_email")
+	@Column(name="customer_phone")
+	private String phone;
+	@Column(name="customer_email")
 	private String email;
-	@OneToOne(targetEntity = User.class,cascade = CascadeType.ALL)
-	@JoinColumn(name="pharmacist_id", referencedColumnName = "login_id")
-	private User user;
 	
-	
+	@OneToOne(targetEntity = CustomerLogin.class,cascade = CascadeType.ALL)
+	@JoinColumn(name="customer_id", referencedColumnName = "cust_login_id")
+	private CustomerLogin customerLogin;
 	
 	public Integer getId() {
 		return id;
@@ -39,18 +40,26 @@ public class Pharmacist {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public User getUser() {
-		return user;
+	public CustomerLogin getCustomerLogin() {
+		return customerLogin;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setCustomerLogin(CustomerLogin customerLogin) {
+		this.customerLogin = customerLogin;
 	}
 	
 	
+	
+
 }

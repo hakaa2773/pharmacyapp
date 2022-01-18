@@ -36,9 +36,13 @@ public class DrugController {
 		drugService.deleteDrugs(id);		
 	}
 	
-	@GetMapping("getbynames")
+	@GetMapping("/getbynames")
 	public List<DrugDto> getallnames(){
 		return drugService.getallnames();
+	}
+	@RequestMapping(method = RequestMethod.GET,value ="/druggetbyid/{id}")
+	public Drugs getDrugsById(@PathVariable Integer id) {
+		return drugService.getById(id);
 	}
 
 

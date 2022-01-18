@@ -1,5 +1,6 @@
 package com.pharmacy.pharmacyapp.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,17 +14,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_rack")
-public class Rack {
+public class Rack implements java.io.Serializable{
 	@Id
 	@Column(name="rack_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column(name="rack_row")
 	private String row;
-	@ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="category_id",referencedColumnName = "category_id")
 	private Category category;
-	@OneToOne(targetEntity = Brand.class, fetch = FetchType.LAZY)
+	@OneToOne(targetEntity = Brand.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="brand_id",referencedColumnName = "brand_id")
 	private Brand brand;
 	public Integer getId() {

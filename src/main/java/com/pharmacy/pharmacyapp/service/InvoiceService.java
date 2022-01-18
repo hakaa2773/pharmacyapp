@@ -3,8 +3,9 @@ package com.pharmacy.pharmacyapp.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.pharmacy.pharmacyapp.DTO.InvoiceDto;
+import com.pharmacy.pharmacyapp.DTO.StockDto;
 import com.pharmacy.pharmacyapp.model.Invoice;
+import com.pharmacy.pharmacyapp.model.Stock;
 
 public interface InvoiceService {
 
@@ -18,6 +19,9 @@ public interface InvoiceService {
 
 	void deleteInvoice(Integer id);
 
-	List<InvoiceDto> getallInvoiceNames();
+	List<StockDto> getallBrandnames();
+	
+	Optional<Stock> reduceStockQty(Integer id, int qty);
+	
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.pharmacy.pharmacyapp.DTO.RackDto;
 import com.pharmacy.pharmacyapp.DTO.StockReturnDto;
 import com.pharmacy.pharmacyapp.model.StockReturn;
 

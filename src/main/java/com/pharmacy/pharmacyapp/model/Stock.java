@@ -14,7 +14,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_stock")
-public class Stock {
+
+public class Stock implements java.io.Serializable {
 	@Id
 	@Column(name="stock_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

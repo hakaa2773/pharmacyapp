@@ -31,6 +31,13 @@ public class PharmacistWebController {
 	}
 	
 	
+	@GetMapping("/403")
+	public String error403() {
+		return "access_denied";
+		
+	}
+	
+	
 	
 	@GetMapping("/showaddpharmacist")
 	public String ShowAddPharmacistForm(Pharmacist pharmacist) {
